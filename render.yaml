@@ -1,0 +1,17 @@
+# Backendni Render.com da bepul ishga tushirish uchun (New → Blueprint → shu repo)
+services:
+  - type: web
+    name: byxojiakbar-api
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://javohir877.github.io

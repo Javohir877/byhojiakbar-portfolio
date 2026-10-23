@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+server/data/
+# Siqilmagan asl videolar (GitHub 100 MB dan katta faylni qabul qilmaydi)
+/videos/
+/.claude/
