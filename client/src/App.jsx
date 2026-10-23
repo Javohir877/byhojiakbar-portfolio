@@ -8,6 +8,8 @@ import Contact from "./components/Contact.jsx";
 import { PROFILE, WORKS } from "./works.js";
 import { addView, getViews } from "./api.js";
 import useReveal from "./useReveal.js";
+import useSfx from "./useSfx.js";
+import SoundToggle from "./components/SoundToggle.jsx";
 
 // Pin qilinganlar birinchi, qolganlari — eng yangisi birinchi
 const ORDERED = [...WORKS.filter((w) => w.pinned), ...WORKS.filter((w) => !w.pinned).reverse()];
@@ -31,6 +33,7 @@ export default function App() {
   const openIndex = playlist.findIndex((w) => w.id === openId);
 
   useReveal([filter]);
+  useSfx();
 
   useEffect(() => {
     getViews().then(setViews);
@@ -55,6 +58,7 @@ export default function App() {
         <nav>
           <a href="#works">Ishlar</a>
           <a href="#services">Xizmatlar</a>
+          <SoundToggle />
           <a href="#contact" className="nav-cta">Buyurtma</a>
         </nav>
       </header>

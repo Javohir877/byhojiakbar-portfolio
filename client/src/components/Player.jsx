@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { posterSrc, videoSrc } from "../works.js";
+import { sfx } from "../sfx.js";
 
 const fmt = (s) => {
   if (!isFinite(s)) return "0:00";
@@ -43,6 +44,7 @@ export default function Player({ works, index, onChange, onClose }) {
         await navigator.share({ title: `${work.title} — By.Xojiakbar`, url });
       } else {
         await navigator.clipboard.writeText(url);
+        sfx.success();
         setCopied(true);
         setTimeout(() => setCopied(false), 1800);
       }
@@ -51,21 +53,37 @@ export default function Player({ works, index, onChange, onClose }) {
 
   const toggle = useCallback(() => {
     const v = video.current;
+    sfx.play(v.paused);
     if (v.paused) v.play().catch(() => {});
     else v.pause();
   }, []);
 
   const seek = (t) => {
     const v = video.current;
+    sfx.tick();
     v.currentTime = Math.max(0, Math.min(v.duration || 0, t));
   };
 
   const go = useCallback(
-    (d) => onChange((index + d + works.length) % works.length),
+    (d) => {
+      sfx.swoosh(d);
+      onChange((index + d + works.length) % works.length);
+    },
     [index, works.length, onChange]
   );
 
+  const close = useCallback(() => {
+    sfx.close();
+    onClose();
+  }, [onClose]);
+
+  const toggleMute = () => {
+    sfx.glitch();
+    setMuted((m) => !m);
+  };
+
   const fullscreen = () => {
+    sfx.impact();
     if (document.fullscreenElement) document.exitFullscreen();
     else box.current.requestFullscreen?.().catch(() => {});
   };
@@ -86,13 +104,13 @@ export default function Player({ works, index, onChange, onClose }) {
   useEffect(() => {
     const onKey = (e) => {
       const v = video.current;
-      if (e.key === "Escape" && !document.fullscreenElement) onClose();
+      if (e.key === "Escape" && !document.fullscreenElement) close();
       else if (e.key === " " || e.key === "k") { e.preventDefault(); toggle(); }
       else if (e.key === "ArrowRight") seek(v.currentTime + 5);
       else if (e.key === "ArrowLeft") seek(v.currentTime - 5);
       else if (e.key === "ArrowDown") go(1);
       else if (e.key === "ArrowUp") go(-1);
-      else if (e.key === "m") setMuted((m) => !m);
+      else if (e.key === "m") toggleMute();
       else if (e.key === "f") fullscreen();
       else return;
       wake();
@@ -104,7 +122,7 @@ export default function Player({ works, index, onChange, onClose }) {
       document.body.style.overflow = "";
       clearTimeout(hideTimer.current);
     };
-  }, [toggle, go, onClose]);
+  }, [toggle, go, close]);
 
   const onBarPointer = (e) => {
     if (e.type === "pointermove" && e.buttons !== 1) return;
@@ -115,8 +133,8 @@ export default function Player({ works, index, onChange, onClose }) {
   const pct = duration ? (time / duration) * 100 : 0;
 
   return (
-    <div className="modal" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <button className="modal-close" onClick={onClose} aria-label="Yopish"><Svg name="close" /></button>
+    <div className="modal" onClick={(e) => e.target === e.currentTarget && close()}>
+      <button className="modal-close" onClick={close} aria-label="Yopish"><Svg name="close" /></button>
       <button className="modal-nav prev" onClick={() => go(-1)} aria-label="Oldingi"><Svg name="prev" /></button>
       <button className="modal-nav next" onClick={() => go(1)} aria-label="Keyingi"><Svg name="next" /></button>
 
@@ -174,7 +192,7 @@ export default function Player({ works, index, onChange, onClose }) {
             <button onClick={toggle} aria-label={playing ? "Pauza" : "Ijro etish"}>
               <Svg name={playing ? "pause" : "play"} />
             </button>
-            <button onClick={() => setMuted((m) => !m)} aria-label={muted ? "Ovozni yoqish" : "Ovozni o'chirish"}>
+            <button onClick={toggleMute} aria-label={muted ? "Ovozni yoqish" : "Ovozni o'chirish"}>
               <Svg name={muted ? "muted" : "volume"} />
             </button>
             <span className="ctl-time">{fmt(time)} / {fmt(duration)}</span>
