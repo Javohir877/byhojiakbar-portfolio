@@ -41,7 +41,7 @@ export default function Player({ works, index, onChange, onClose }) {
     const url = location.href;
     try {
       if (navigator.share && matchMedia("(pointer: coarse)").matches) {
-        await navigator.share({ title: `${work.title} — By.Xojiakbar`, url });
+        await navigator.share({ title: `${work.title} — By.Hojiakbar`, url });
       } else {
         await navigator.clipboard.writeText(url);
         sfx.success();

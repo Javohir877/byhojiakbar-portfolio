@@ -1,5 +1,5 @@
 // ============================================================
-//  By.Xojiakbar — ishlar ro'yxati
+//  By.Hojiakbar — ishlar ro'yxati
 //  Yangi video: faylni client/public/videos/ ga qo'ying (nomi.mp4 + nomi.jpg muqova)
 //  va quyidagi ro'yxat OXIRIGA qator qo'shing. Oxirgi qo'shilgan — saytda birinchi.
 //
@@ -9,7 +9,7 @@
 // ============================================================
 
 export const PROFILE = {
-  name: "By.Xojiakbar",
+  name: "By.Hojiakbar",
   role: "Video Editor",
   about: "Futbol editlar, Reels va Shorts, blogerlar uchun kontent montaj — dinamik o'tishlar, VFX, effektlar va rang korreksiyasi.",
   telegram: "https://t.me/ByHojiakbarr",

@@ -1,4 +1,4 @@
-// By.Xojiakbar portfolio — backend
+// By.Hojiakbar portfolio — backend
 //   GET  /api/health        — server ishlayaptimi
 //   GET  /api/views         — barcha videolarning ko'rishlar soni
 //   POST /api/views/:id     — videoni ochishda ko'rishni +1 qilish

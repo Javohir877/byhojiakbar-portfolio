@@ -1,4 +1,4 @@
-# By.Xojiakbar — Video Editor Portfolio
+# By.Hojiakbar — Video Editor Portfolio
 
 Sayt: https://javohir877.github.io/byxojiakbar-portfolio/
 

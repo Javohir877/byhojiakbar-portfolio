@@ -91,15 +91,45 @@ header, main, footer { position: relative; z-index: 1; }
 /* ============ HERO ============ */
 .hero { display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: clamp(28px, 5vw, 80px);
   max-width: 1200px; margin: 0 auto; padding: clamp(36px, 7vw, 96px) clamp(16px, 5vw, 64px); }
-.hero-photo { position: relative; animation: float 7s ease-in-out infinite; }
-.hero-photo img { position: relative; display: block; width: 100%; border-radius: 26px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .65), 0 0 0 1px rgba(255, 255, 255, .08); }
-.hero-ring { position: absolute; inset: -3px; border-radius: 29px; overflow: hidden; }
+/* ---------- 3D rasm ---------- */
+.hero-photo { position: relative; }
+.hero-photo::after { content: ""; position: absolute; inset: -40px; z-index: -1; filter: blur(50px); border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 42, 61, .3), rgba(123, 92, 255, .25) 55%, transparent 75%); }
+.tilt { position: relative; perspective: 1100px; animation: float 7s ease-in-out infinite; }
+.tilt-card { --rx: 0deg; --ry: 0deg; --gx: 50%; --gy: 50%; --px: 0; --py: 0; --hover: 0;
+  position: relative; transform-style: preserve-3d; will-change: transform;
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) scale(calc(1 + var(--hover) * .03)); }
+.hero-ring { position: absolute; inset: -3px; border-radius: 29px; overflow: hidden; transform: translateZ(-1px); }
 .hero-ring::before { content: ""; position: absolute; inset: -50%;
   background: conic-gradient(from 0deg, var(--red), var(--violet), transparent 40%, var(--red));
   animation: spin 6s linear infinite; }
-.hero-photo::after { content: ""; position: absolute; inset: -40px; z-index: -1; filter: blur(50px); border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 42, 61, .3), rgba(123, 92, 255, .25) 55%, transparent 75%); }
+.tilt-img { position: relative; border-radius: 26px; overflow: hidden; transform: translateZ(0);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .08); }
+/* Rasm ichida qarama-qarshi siljish — chuqurlik hissi */
+.tilt-img img { display: block; width: 100%;
+  transform: scale(1.1) translate(calc(var(--px) * -3.5%), calc(var(--py) * -3.5%)); }
+.tilt-glare { position: absolute; inset: 0; border-radius: 26px; pointer-events: none; transform: translateZ(2px);
+  mix-blend-mode: overlay; opacity: calc(.45 + var(--hover) * .35);
+  background: radial-gradient(circle at var(--gx) var(--gy), rgba(255, 255, 255, .7), rgba(255, 255, 255, .08) 35%, transparent 60%); }
+.tilt-edge { position: absolute; inset: 0; border-radius: 26px; pointer-events: none; transform: translateZ(3px);
+  background: linear-gradient(calc(110deg + var(--px) * 40deg), transparent 40%, rgba(185, 166, 255, .22) 50%, transparent 60%); }
+.tilt-chip { position: absolute; padding: 8px 14px; border-radius: 999px; white-space: nowrap; font-size: 13px; font-weight: 800;
+  background: rgba(17, 11, 20, .72); border: 1px solid rgba(185, 166, 255, .35);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .5), 0 0 20px rgba(123, 92, 255, .25); pointer-events: none; }
+.tilt-chip.c1 { top: 8%; left: -6%; transform: translateZ(70px); }
+.tilt-chip.c2 { top: 44%; right: -7%; transform: translateZ(95px); border-color: rgba(255, 42, 61, .5);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .5), 0 0 20px rgba(255, 42, 61, .35); }
+.tilt-chip.c3 { bottom: 7%; left: 8%; transform: translateZ(55px); }
+.tilt-spark { position: absolute; width: 8px; height: 8px; border-radius: 50%; pointer-events: none;
+  background: #fff; box-shadow: 0 0 10px #fff, 0 0 22px var(--red), 0 0 40px var(--red); animation: twinkle 2.4s ease-in-out infinite; }
+.tilt-spark.s1 { top: -3%; right: 18%; transform: translateZ(120px); }
+.tilt-spark.s2 { bottom: 22%; left: -4%; transform: translateZ(140px); animation-delay: -.8s;
+  box-shadow: 0 0 10px #fff, 0 0 22px var(--violet), 0 0 40px var(--violet); }
+.tilt-spark.s3 { bottom: -2%; right: 12%; transform: translateZ(100px); animation-delay: -1.6s; width: 6px; height: 6px; }
+@keyframes twinkle { 50% { opacity: .25; } }
+.tilt-shadow { position: absolute; left: 10%; right: 10%; bottom: -34px; height: 30px; border-radius: 50%; filter: blur(18px);
+  background: rgba(0, 0, 0, .7); transform: translateX(calc(var(--px, 0) * 20px)); }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes float { 50% { transform: translateY(-10px); } }
 
@@ -305,5 +335,5 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
 @media (prefers-reduced-motion: reduce) {
   .aurora { animation-duration: 60s; }
   .grid-lines { animation-duration: 14s; }
-  .hero-photo, .hero-ring::before { animation-duration: 14s; }
+  .tilt, .hero-ring::before { animation-duration: 14s; }
 }

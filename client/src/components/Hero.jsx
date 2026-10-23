@@ -1,15 +1,15 @@
 import hero from "../assets/hero.webp";
+import Tilt3D from "./Tilt3D.jsx";
 
 export default function Hero({ profile, count }) {
   return (
     <section className="hero">
       <div className="hero-photo">
-        <div className="hero-ring" aria-hidden="true" />
-        <img src={hero} alt={profile.name} />
+        <Tilt3D src={hero} alt={profile.name} />
       </div>
       <div className="hero-text">
         <p className="script">portfolio</p>
-        <h1>By.<span>Xojiakbar</span></h1>
+        <h1>By.<span>Hojiakbar</span></h1>
         <p className="role">{profile.role}</p>
         <p className="about">{profile.about}</p>
         <div className="hero-actions">

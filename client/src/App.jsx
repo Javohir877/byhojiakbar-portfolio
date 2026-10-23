@@ -54,7 +54,7 @@ export default function App() {
     <>
       <Background />
       <header className="nav">
-        <a href="#top" className="logo">By.<span>Xojiakbar</span></a>
+        <a href="#top" className="logo">By.<span>Hojiakbar</span></a>
         <nav>
           <a href="#works">Ishlar</a>
           <a href="#services">Xizmatlar</a>
@@ -70,7 +70,7 @@ export default function App() {
         <Contact profile={PROFILE} />
       </main>
 
-      <footer>© {new Date().getFullYear()} By.Xojiakbar · Video Editor</footer>
+      <footer>© {new Date().getFullYear()} By.Hojiakbar · Video Editor</footer>
 
       {openIndex >= 0 && (
         <Player
