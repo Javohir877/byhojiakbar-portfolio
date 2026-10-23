@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "byxojiakbar-portfolio",
   "private": true,
   "version": "1.0.0",
@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist -m \"Saytni yangilash\""
+    "deploy": "vite build && gh-pages -d dist --dotfiles -m \"Saytni yangilash\""
   },
   "dependencies": {
     "react": "19.1.0",
