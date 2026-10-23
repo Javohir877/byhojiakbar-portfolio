@@ -16,6 +16,8 @@ const Icon = {
   prev: <path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z" />,
   next: <path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4 4.6 4.6z" />,
   close: <path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z" />,
+  share: <path d="M18 16.1c-.8 0-1.5.3-2 .8l-7.1-4.2c.1-.2.1-.5.1-.7s0-.5-.1-.7L16 7.2c.5.5 1.2.8 2 .8 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .2 0 .5.1.7L8 9.8C7.5 9.3 6.8 9 6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.5-.3 2-.8l7.1 4.2c-.1.2-.1.4-.1.6 0 1.6 1.3 2.9 2.9 2.9s2.9-1.3 2.9-2.9-1.2-2.9-2.8-2.9z" />,
+  check: <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />,
 };
 const Svg = ({ name }) => <svg viewBox="0 0 24 24" aria-hidden="true">{Icon[name]}</svg>;
 
@@ -31,6 +33,21 @@ export default function Player({ works, index, onChange, onClose }) {
   const [buffered, setBuffered] = useState(0);
   const [loading, setLoading] = useState(true);
   const [idle, setIdle] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  // Telefonda tizim "Ulashish" oynasi, kompyuterda havolani nusxalash
+  const share = async () => {
+    const url = location.href;
+    try {
+      if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+        await navigator.share({ title: `${work.title} — By.Xojiakbar`, url });
+      } else {
+        await navigator.clipboard.writeText(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1800);
+      }
+    } catch {}
+  };
 
   const toggle = useCallback(() => {
     const v = video.current;
@@ -162,6 +179,9 @@ export default function Player({ works, index, onChange, onClose }) {
             </button>
             <span className="ctl-time">{fmt(time)} / {fmt(duration)}</span>
             <span className="ctl-count">{index + 1} / {works.length}</span>
+            <button onClick={share} aria-label="Havolani ulashish" title={copied ? "Nusxalandi!" : "Havolani ulashish"}>
+              <Svg name={copied ? "check" : "share"} />
+            </button>
             <button onClick={fullscreen} aria-label="To'liq ekran"><Svg name="full" /></button>
           </div>
         </div>

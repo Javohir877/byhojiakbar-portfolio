@@ -128,12 +128,56 @@ h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 900; text-transform: uppe
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, .3);
   transition: transform .25s, opacity .25s; }
 .card:hover .play::before { transform: scale(.8); opacity: 0; }
-.card .title { position: absolute; left: 14px; right: 14px; bottom: 12px; font-weight: 700; font-size: 14px; }
-.card .pin { position: absolute; top: 10px; right: 10px; padding: 5px 11px; border-radius: 999px;
+.card { animation: card-in .6s cubic-bezier(.2, .8, .2, 1) backwards; }
+@keyframes card-in { from { opacity: 0; transform: translateY(24px) scale(.97); } }
+.card .meta { position: absolute; left: 14px; right: 14px; bottom: 12px; display: grid; gap: 6px; }
+.card .tag { justify-self: start; padding: 3px 9px; border-radius: 999px; font-size: 10px; font-weight: 800;
+  letter-spacing: 1.2px; text-transform: uppercase; color: var(--violet-soft);
+  background: rgba(123, 92, 255, .18); border: 1px solid rgba(123, 92, 255, .4); backdrop-filter: blur(6px); }
+.card .title { font-weight: 700; font-size: 14px; line-height: 1.3; text-shadow: 0 1px 6px rgba(0, 0, 0, .8); }
+.card .duration { position: absolute; top: 10px; right: 10px; padding: 4px 9px; border-radius: 8px; font-size: 12px;
+  font-weight: 700; font-variant-numeric: tabular-nums; background: rgba(0, 0, 0, .6); backdrop-filter: blur(6px); }
+.card .play { background: linear-gradient(to top, rgba(0, 0, 0, .85), rgba(0, 0, 0, .1) 50%, transparent 70%); }
+
+/* Toifa filtrlari */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+.chip { padding: 9px 16px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 14px;
+  background: rgba(255, 255, 255, .04); border: 1px solid var(--line); color: var(--muted);
+  transition: color .2s, background .2s, border-color .2s, box-shadow .2s; }
+.chip span { margin-left: 4px; font-size: 12px; opacity: .7; }
+.chip:hover { color: var(--text); border-color: rgba(123, 92, 255, .5); }
+.chip.active { color: #fff; border-color: transparent; background: linear-gradient(135deg, var(--violet), var(--red));
+  box-shadow: 0 6px 24px rgba(255, 42, 61, .35); }
+
+/* Aylantirganda paydo bo'lish */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ============ XIZMATLAR ============ */
+.services { max-width: 1200px; margin: 0 auto; padding: 56px clamp(16px, 5vw, 64px); }
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+.service { position: relative; padding: 26px 22px; border-radius: 20px; overflow: hidden;
+  background: rgba(17, 11, 20, .6); border: 1px solid var(--line); backdrop-filter: blur(10px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1), border-color .3s, box-shadow .3s; }
+.service::before { content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(circle at 20% 0%, rgba(255, 42, 61, .18), transparent 60%); }
+.service:hover { border-color: rgba(123, 92, 255, .55); box-shadow: 0 16px 40px rgba(123, 92, 255, .2); }
+.service:hover::before { opacity: 1; }
+.service-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; font-size: 26px;
+  background: linear-gradient(135deg, rgba(123, 92, 255, .3), rgba(255, 42, 61, .3)); border: 1px solid rgba(255, 255, 255, .1); }
+.service h3 { position: relative; margin: 18px 0 8px; font-size: 18px; font-weight: 800; }
+.service p { position: relative; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+.steps div { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 16px;
+  border: 1px dashed rgba(255, 255, 255, .14); }
+.steps b { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; font-weight: 900;
+  background: linear-gradient(135deg, var(--violet), var(--red)); box-shadow: 0 0 18px rgba(255, 42, 61, .4); }
+.steps span { color: var(--muted); font-size: 14px; line-height: 1.5; }
+.card .pin { position: absolute; top: 10px; left: 10px; padding: 5px 11px; border-radius: 999px;
   font-size: 12px; font-weight: 800; background: linear-gradient(135deg, var(--violet), var(--red));
   box-shadow: 0 0 16px rgba(255, 42, 61, .55); }
 .card.pinned { border-color: rgba(255, 42, 61, .55); box-shadow: 0 0 30px rgba(255, 42, 61, .2); }
-.card .views { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px;
+.card .views { position: absolute; top: 44px; right: 10px; padding: 4px 10px; border-radius: 999px;
   font-size: 12px; font-weight: 800; background: rgba(0, 0, 0, .55); backdrop-filter: blur(6px); }
 
 /* ============ BUYURTMA ============ */
@@ -224,6 +268,11 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
 }
 @media (max-width: 600px) {
   .grid { gap: 12px; }
+  .steps { grid-template-columns: 1fr; }
+  .card .pin-text { display: none; }
+  .card .pin { padding: 4px 8px; }
+  .chips { gap: 8px; }
+  .chip { padding: 8px 13px; font-size: 13px; }
   .card { margin-bottom: 12px; border-radius: 14px; }
   .card .title { font-size: 12px; left: 10px; bottom: 9px; }
   .card .play::before { width: 44px; height: 44px; background-size: 20px; }

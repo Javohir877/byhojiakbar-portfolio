@@ -3,33 +3,41 @@
 //  Yangi video: faylni client/public/videos/ ga qo'ying (nomi.mp4 + nomi.jpg muqova)
 //  va quyidagi ro'yxat OXIRIGA qator qo'shing. Oxirgi qo'shilgan — saytda birinchi.
 //
-//  format: "vertical" (9:16), "portrait" (3:4), "square" (1:1), "horizontal" (16:9)
+//  format:   "vertical" (9:16), "portrait" (3:4), "square" (1:1), "horizontal" (16:9)
+//  category: CATEGORIES dagi kalitlardan biri
+//  pinned:   true — doim galereyaning eng boshida turadi
 // ============================================================
 
 export const PROFILE = {
   name: "By.Xojiakbar",
   role: "Video Editor",
-  about: "Reels, Shorts va YouTube uchun dinamik montaj, VFX, effektlar va rang korreksiyasi.",
+  about: "Futbol editlar, Reels va Shorts, blogerlar uchun kontent montaj — dinamik o'tishlar, VFX, effektlar va rang korreksiyasi.",
   telegram: "https://t.me/ByHojiakbarr",
   telegramNick: "@ByHojiakbarr",
   youtube: "https://youtube.com/@byhojiakbarr",
   instagram: "",
 };
 
+export const CATEGORIES = {
+  football: "Futbol",
+  content: "Bloger kontent",
+  auto: "Avto",
+  doc: "Hujjatli",
+};
+
 export const WORKS = [
-  // pinned: true — doim galereyaning eng boshida turadi
-  { id: "neymar-edit", title: "My first edit — Neymar", format: "portrait", pinned: true },
-  { id: "comp-iris", title: "Iris", format: "portrait" },
-  { id: "i-win-you-lose", title: "I win, you lose", format: "square" },
-  { id: "hoji-vfx-part1", title: "Hoji VFX — Part 1", format: "vertical" },
-  { id: "trading", title: "Trading", format: "square" },
-  { id: "iris-2", title: "Iris 2", format: "square" },
-  { id: "mrzoxxd-1", title: "Mrzoxxd", format: "portrait" },
-  { id: "mrzoxxd-4", title: "Mrzoxxd — 4", format: "square" },
-  { id: "ballondor", title: "Ballon d'Or", format: "portrait" },
-  { id: "ima-edit", title: "Ima edit", format: "vertical" },
-  { id: "prezident-edits", title: "My best prezident edits", format: "square" },
-  { id: "comp-30", title: "Yangi edit", format: "vertical" },
+  { id: "neymar-edit", title: "Neymar — mening birinchi editim", category: "football", format: "portrait", duration: 18, pinned: true },
+  { id: "comp-iris", title: "Yangi rubrika: stol atrofida suhbat", category: "content", format: "portrait", duration: 50 },
+  { id: "i-win-you-lose", title: "Ronaldo — «I win, you lose»", category: "football", format: "square", duration: 18 },
+  { id: "hoji-vfx-part1", title: "Bozor kaliti: savdoga kirishdan oldin", category: "content", format: "vertical", duration: 49 },
+  { id: "trading", title: "Birjada brokerman — trading haqida", category: "content", format: "square", duration: 53 },
+  { id: "iris-2", title: "Ronaldo va muxlis — samimiy lahza", category: "football", format: "square", duration: 32 },
+  { id: "mrzoxxd-1", title: "Mirzoxid — yosh hujumchi portreti", category: "football", format: "portrait", duration: 15 },
+  { id: "mrzoxxd-4", title: "Mirzoxid — maydondagi lahzalar", category: "football", format: "square", duration: 16 },
+  { id: "ballondor", title: "Ballon d'Or 25/26 — kim g'olib?", category: "football", format: "portrait", duration: 26 },
+  { id: "ima-edit", title: "Maktabdagi tadbir: tinchlik tilagi", category: "doc", format: "vertical", duration: 72 },
+  { id: "prezident-edits", title: "Islom Karimov xotirasiga", category: "doc", format: "square", duration: 61 },
+  { id: "comp-30", title: "Kechki shahar: AMG, GT-R va BMW M4", category: "auto", format: "vertical", duration: 17 },
 ];
 
 const base = import.meta.env.BASE_URL;
