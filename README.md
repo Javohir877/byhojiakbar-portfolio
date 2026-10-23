@@ -1,6 +1,6 @@
 # By.Hojiakbar — Video Editor Portfolio
 
-Sayt: https://javohir877.github.io/byxojiakbar-portfolio/
+Sayt: https://javohir877.github.io/byhojiakbar-portfolio/
 
 - `client/` — React (Vite) sayt: galereya, o'z video pleyeri, buyurtma formasi
 - `server/` — Node.js (Express) backend: buyurtmani Telegram botga yuborish, ko'rishlar statistikasi
@@ -28,7 +28,7 @@ cd client && npm install && npm run dev     # http://localhost:5173
 1. render.com da GitHub orqali kiring → **New → Blueprint** → shu repo (`render.yaml` tayyor).
 2. `TELEGRAM_BOT_TOKEN` — @BotFather dan yangi bot yarating.
    `TELEGRAM_CHAT_ID` — botga `/start` yozing, so'ng `https://api.telegram.org/bot<TOKEN>/getUpdates` dan `chat.id` ni oling.
-3. Render bergan manzilni (masalan `https://byxojiakbar-api.onrender.com`) `client/.env.production`
+3. Render bergan manzilni (masalan `https://byhojiakbar-api.onrender.com`) `client/.env.production`
    dagi `VITE_API_URL=` ga yozing va `cd client && npm run deploy` qiling.
 
 `VITE_API_URL` bo'sh turguncha sayt backendsiz ishlaydi: forma o'rniga Telegram tugmasi chiqadi, statistika ko'rinmaydi.

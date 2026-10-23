@@ -19,7 +19,7 @@ try {
   git(["add", "-A", "-f"], tmp);
   git(["commit", "-q", "-m", `Saytni yangilash ${new Date().toISOString()}`], tmp);
   git(["push", "-f", "origin", "gh-pages"], tmp);
-  console.log("Joylandi: https://javohir877.github.io/byxojiakbar-portfolio/");
+  console.log("Joylandi: https://javohir877.github.io/byhojiakbar-portfolio/");
 } finally {
   git(["worktree", "remove", "--force", tmp]);
   rmSync(tmp, { recursive: true, force: true });

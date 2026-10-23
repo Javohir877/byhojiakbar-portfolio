@@ -1,7 +1,7 @@
 # Backendni Render.com da bepul ishga tushirish uchun (New → Blueprint → shu repo)
 services:
   - type: web
-    name: byxojiakbar-api
+    name: byhojiakbar-api
     runtime: node
     rootDir: server
     plan: free
