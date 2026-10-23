@@ -19,7 +19,7 @@ function Card({ work, views, onOpen }) {
 
   return (
     <button
-      className={`card ${work.format}`}
+      className={`card ${work.format}${work.pinned ? " pinned" : ""}`}
       onClick={onOpen}
       onMouseEnter={() => preview(true)}
       onMouseLeave={() => preview(false)}
@@ -28,6 +28,7 @@ function Card({ work, views, onOpen }) {
       <img src={posterSrc(work)} alt="" loading="lazy" />
       <video ref={video} src={videoSrc(work)} muted loop playsInline preload="none" />
       <span className="play" aria-hidden="true" />
+      {work.pinned && <span className="pin">📌 Birinchi edit</span>}
       {views > 0 && <span className="views">👁 {formatViews(views)}</span>}
       <span className="title">{work.title}</span>
     </button>

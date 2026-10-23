@@ -129,6 +129,10 @@ h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 900; text-transform: uppe
   transition: transform .25s, opacity .25s; }
 .card:hover .play::before { transform: scale(.8); opacity: 0; }
 .card .title { position: absolute; left: 14px; right: 14px; bottom: 12px; font-weight: 700; font-size: 14px; }
+.card .pin { position: absolute; top: 10px; right: 10px; padding: 5px 11px; border-radius: 999px;
+  font-size: 12px; font-weight: 800; background: linear-gradient(135deg, var(--violet), var(--red));
+  box-shadow: 0 0 16px rgba(255, 42, 61, .55); }
+.card.pinned { border-color: rgba(255, 42, 61, .55); box-shadow: 0 0 30px rgba(255, 42, 61, .2); }
 .card .views { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px;
   font-size: 12px; font-weight: 800; background: rgba(0, 0, 0, .55); backdrop-filter: blur(6px); }
 
@@ -229,6 +233,9 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
   .modal-nav { display: none; }
   .player, .player.portrait, .player.square, .player.vertical { width: 100%; border-radius: 0; }
 }
+/* Animatsiya kamaytirilgan tizimlarda: fon jonli qoladi, faqat sekinroq */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .aurora { animation-duration: 60s; }
+  .grid-lines { animation-duration: 14s; }
+  .hero-photo, .hero-ring::before { animation-duration: 14s; }
 }

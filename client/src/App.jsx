@@ -7,8 +7,8 @@ import Contact from "./components/Contact.jsx";
 import { PROFILE, WORKS } from "./works.js";
 import { addView, getViews } from "./api.js";
 
-// Eng yangi ish birinchi
-const ORDERED = [...WORKS].reverse();
+// Pin qilinganlar birinchi, qolganlari — eng yangisi birinchi
+const ORDERED = [...WORKS.filter((w) => w.pinned), ...WORKS.filter((w) => !w.pinned).reverse()];
 
 export default function App() {
   const [openIndex, setOpenIndex] = useState(null);

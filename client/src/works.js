@@ -17,7 +17,8 @@ export const PROFILE = {
 };
 
 export const WORKS = [
-  { id: "neymar-edit", title: "Best Neymar edit", format: "portrait" },
+  // pinned: true — doim galereyaning eng boshida turadi
+  { id: "neymar-edit", title: "My first edit — Neymar", format: "portrait", pinned: true },
   { id: "comp-iris", title: "Iris", format: "portrait" },
   { id: "i-win-you-lose", title: "I win, you lose", format: "square" },
   { id: "hoji-vfx-part1", title: "Hoji VFX — Part 1", format: "vertical" },
@@ -28,6 +29,7 @@ export const WORKS = [
   { id: "ballondor", title: "Ballon d'Or", format: "portrait" },
   { id: "ima-edit", title: "Ima edit", format: "vertical" },
   { id: "prezident-edits", title: "My best prezident edits", format: "square" },
+  { id: "comp-30", title: "Yangi edit", format: "vertical" },
 ];
 
 const base = import.meta.env.BASE_URL;
