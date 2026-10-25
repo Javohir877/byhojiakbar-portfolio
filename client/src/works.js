@@ -35,8 +35,6 @@ export const WORKS = [
   { id: "iris-2", title: "Ronaldo va muxlis — samimiy lahza", category: "football", format: "square", duration: 32 },
   { id: "mrzoxxd-1", title: "Mirzoxid — yosh hujumchi portreti", category: "football", format: "portrait", duration: 15 },
   { id: "mrzoxxd-4", title: "Mirzoxid — maydondagi lahzalar", category: "football", format: "square", duration: 16 },
-  { id: "ballondor", title: "Ballon d'Or 25/26 — kim g'olib?", category: "football", format: "portrait", duration: 26 },
-  { id: "ima-edit", title: "Maktabdagi tadbir: tinchlik tilagi", category: "doc", format: "vertical", duration: 72 },
   { id: "prezident-edits", title: "Islom Karimov xotirasiga", category: "doc", format: "square", duration: 61 },
   { id: "comp-30", title: "Kechki shahar: AMG, GT-R va BMW M4", category: "auto", format: "vertical", duration: 17 },
   { id: "edit-9910", title: "Bozor kaliti: qo'rquv va sabrsizlik", category: "content", format: "vertical", duration: 32 },
