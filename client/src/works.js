@@ -15,7 +15,7 @@ export const PROFILE = {
   telegram: "https://t.me/ByHojiakbarr",
   telegramNick: "@ByHojiakbarr",
   youtube: "https://youtube.com/@byhojiakbarr",
-  instagram: "",
+  instagram: "https://www.instagram.com/by.hojiakbarw",
 };
 
 export const CATEGORIES = {
