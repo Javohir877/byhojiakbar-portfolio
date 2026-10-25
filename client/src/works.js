@@ -21,6 +21,7 @@ export const PROFILE = {
 export const CATEGORIES = {
   football: "Futbol",
   content: "Bloger kontent",
+  comedy: "Kulgili",
   auto: "Avto",
   doc: "Hujjatli",
 };
@@ -38,6 +39,11 @@ export const WORKS = [
   { id: "ima-edit", title: "Maktabdagi tadbir: tinchlik tilagi", category: "doc", format: "vertical", duration: 72 },
   { id: "prezident-edits", title: "Islom Karimov xotirasiga", category: "doc", format: "square", duration: 61 },
   { id: "comp-30", title: "Kechki shahar: AMG, GT-R va BMW M4", category: "auto", format: "vertical", duration: 17 },
+  { id: "edit-9910", title: "Bozor kaliti: qo'rquv va sabrsizlik", category: "content", format: "vertical", duration: 32 },
+  { id: "kamol", title: "Kamol — o'shanda va hozir", category: "content", format: "portrait", duration: 27 },
+  { id: "mrzoxxd-3", title: "Mirzoxid — mashg'ulotdagi texnika", category: "football", format: "square", duration: 22 },
+  { id: "neymar-jr", title: "Yosh Neymar — Santos davri", category: "football", format: "portrait", duration: 22 },
+  { id: "azim-maktab", title: "Azim aka va maktab hangomasi 😂", category: "comedy", format: "portrait", duration: 54 },
 ];
 
 const base = import.meta.env.BASE_URL;
