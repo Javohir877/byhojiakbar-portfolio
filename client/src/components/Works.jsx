@@ -15,7 +15,11 @@ function Card({ work, index, views, onOpen }) {
   const preview = (on) => {
     const v = video.current;
     if (!v) return;
-    if (on) v.play().catch(() => {});
+    if (on) {
+      // Video faqat birinchi hover'da ulanadi — sahifa ochilganda hech narsa yuklanmaydi
+      if (!v.getAttribute("src")) v.src = videoSrc(work);
+      v.play().catch(() => {});
+    }
     else { v.pause(); v.currentTime = 0; }
   };
 
@@ -28,8 +32,8 @@ function Card({ work, index, views, onOpen }) {
       onMouseLeave={() => preview(false)}
       aria-label={`${work.title} — ko'rish`}
     >
-      <img src={posterSrc(work)} alt="" loading="lazy" />
-      <video ref={video} src={videoSrc(work)} muted loop playsInline preload="none" />
+      <img src={posterSrc(work)} alt="" loading="lazy" decoding="async" />
+      <video ref={video} muted loop playsInline preload="none" />
       <span className="play" aria-hidden="true" />
       {work.pinned && <span className="pin">📌<span className="pin-text"> Birinchi edit</span></span>}
       {views > 0 && <span className="views">👁 {formatViews(views)}</span>}

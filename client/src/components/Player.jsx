@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { posterSrc, videoSrc } from "../works.js";
 import { sfx } from "../sfx.js";
+import { setPaused } from "../perf.js";
 
 const fmt = (s) => {
   if (!isFinite(s)) return "0:00";
@@ -94,6 +95,12 @@ export default function Player({ works, index, onChange, onClose }) {
     clearTimeout(hideTimer.current);
     hideTimer.current = setTimeout(() => setIdle(true), 2500);
   };
+
+  // Pleyer ochiq turganda orqadagi fon va 3D animatsiyalar to'xtaydi — video silliq o'ynaydi
+  useEffect(() => {
+    setPaused(true);
+    return () => setPaused(false);
+  }, []);
 
   useEffect(() => {
     setTime(0); setDuration(0); setBuffered(0); setLoading(true);

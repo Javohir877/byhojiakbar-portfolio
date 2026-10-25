@@ -21,7 +21,7 @@ export default function Services() {
         {SERVICES.map((s, i) => (
           <article className="service reveal" key={s.title} style={{ transitionDelay: `${i * 80}ms` }}>
             <div className="service-img">
-              <img src={s.img} alt={s.title} loading="lazy" />
+              <img src={s.img} alt={s.title} loading="lazy" decoding="async" />
             </div>
             <div className="service-body">
               <h3>{s.title}</h3>

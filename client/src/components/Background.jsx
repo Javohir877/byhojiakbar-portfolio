@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { goLite, isLite, isPaused, onLiteChange } from "../perf.js";
 
 // Jonli fon: miltillovchi yulduzlar, ko'tariluvchi uchqunlar, uchar yulduzlar,
 // sichqoncha/barmoqqa javob beradi, bosilganda uchqun portlashi chiqadi.
@@ -51,18 +52,20 @@ export default function Background() {
     };
 
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Fon yumshoq nurlardan iborat — yuqori aniqlik shart emas, piksellar 2-4 barobar kam
+      dpr = Math.min(window.devicePixelRatio || 1, isLite() ? 1 : 1.5);
       w = c.width = Math.floor(innerWidth * dpr);
       h = c.height = Math.floor(innerHeight * dpr);
       const area = innerWidth * innerHeight;
-      stars = Array.from({ length: Math.min(260, Math.floor(area / 5000)) }, () => ({
+      const lite = isLite();
+      stars = Array.from({ length: lite ? Math.min(60, Math.floor(area / 14000)) : Math.min(140, Math.floor(area / 8000)) }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
         z: Math.random(),
         tw: Math.random() * Math.PI * 2,
         speed: rand(0.6, 2.2),
       }));
-      embers = Array.from({ length: Math.min(140, Math.floor(area / 9000)) }, () => makeEmber(true));
+      embers = Array.from({ length: lite ? Math.min(30, Math.floor(area / 26000)) : Math.min(80, Math.floor(area / 14000)) }, () => makeEmber(true));
     };
 
     const burst = (x, y) => {
@@ -86,9 +89,24 @@ export default function Background() {
     };
     let nextShoot = performance.now() + rand(1500, 4000);
 
+    // Kadr tezligini kuzatish: sekinlashsa — yengil rejimga o'tiladi
+    let statT = 0, statN = 0;
     const frame = (now) => {
-      const dt = Math.min(3, (now - last) / 16.67) * calm; // kadrlar tezligidan mustaqil harakat
+      raf = requestAnimationFrame(frame);
+      // Pleyer ochiq yoki tab yashirin — chizilmaydi
+      if (isPaused()) { last = now; return; }
+      // Yengil rejimda 30 kadr/s yetarli
+      if (isLite() && now - last < 30) return;
+      const raw = now - last;
+      const dt = Math.min(3, raw / 16.67) * calm; // kadrlar tezligidan mustaqil harakat
       last = now;
+      if (!isLite() && raw < 500) {
+        statT += raw; statN++;
+        if (statN >= 90) {
+          if (statT / statN > 26) goLite();
+          statT = statN = 0;
+        }
+      }
       ctx.clearRect(0, 0, w, h);
       ctx.globalCompositeOperation = "lighter";
 
@@ -185,7 +203,6 @@ export default function Background() {
       }
 
       ctx.globalAlpha = 1;
-      raf = requestAnimationFrame(frame);
     };
 
     const onMove = (e) => {
@@ -202,8 +219,16 @@ export default function Background() {
       burst(e.clientX * dpr, e.clientY * dpr);
     };
 
+    // Telefonda manzil paneli chiqib-yashirinishi resize chaqiradi — kichik balandlik o'zgarishida qayta qurilmaydi
+    let sizeW = innerWidth, sizeH = innerHeight;
+    const onResize = () => {
+      if (innerWidth === sizeW && Math.abs(innerHeight - sizeH) < 160) return;
+      sizeW = innerWidth; sizeH = innerHeight;
+      resize();
+    };
     resize();
-    addEventListener("resize", resize);
+    addEventListener("resize", onResize);
+    const offLite = onLiteChange(resize);
     addEventListener("pointermove", onMove, { passive: true });
     addEventListener("pointerdown", onDown, { passive: true });
     document.addEventListener("pointerleave", onLeave);
@@ -211,7 +236,8 @@ export default function Background() {
 
     return () => {
       cancelAnimationFrame(raf);
-      removeEventListener("resize", resize);
+      removeEventListener("resize", onResize);
+      offLite();
       removeEventListener("pointermove", onMove);
       removeEventListener("pointerdown", onDown);
       document.removeEventListener("pointerleave", onLeave);
