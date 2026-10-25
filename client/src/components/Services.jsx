@@ -1,8 +1,14 @@
+import football from "../assets/services/football.jpg";
+import content from "../assets/services/content.jpg";
+import reels from "../assets/services/reels.jpg";
+import vfx from "../assets/services/vfx.jpg";
+
+// Rasmlar — Hojiakbarning o'z editlaridan olingan kadrlar
 const SERVICES = [
-  { icon: "⚽", title: "Futbol editlar", text: "Futbolchilar va havaskor o'yinchilar uchun dinamik editlar: sekinlashuv, beat sync, effektlar." },
-  { icon: "🎙", title: "Bloger kontent", text: "Gapiruvchi videolar, podkast va rubrikalar: matn animatsiyasi, kesimlar, ritm." },
-  { icon: "📱", title: "Reels / Shorts", text: "Vertikal format, birinchi soniyadan ushlab qoladigan montaj va trendga mos uslub." },
-  { icon: "✨", title: "VFX va rang", text: "Vizual effektlar, o'tishlar, rang korreksiyasi — videoga kino ko'rinishi beraman." },
+  { img: football, title: "Futbol editlar", text: "Futbolchilar va havaskor o'yinchilar uchun dinamik editlar: sekinlashuv, beat sync, effektlar." },
+  { img: content, title: "Bloger kontent", text: "Gapiruvchi videolar, podkast va rubrikalar: matn animatsiyasi, kesimlar, ritm." },
+  { img: reels, title: "Reels / Shorts", text: "Vertikal format, birinchi soniyadan ushlab qoladigan montaj va trendga mos uslub." },
+  { img: vfx, title: "VFX va rang", text: "Vizual effektlar, o'tishlar, rang korreksiyasi — videoga kino ko'rinishi beraman." },
 ];
 
 export default function Services() {
@@ -14,9 +20,13 @@ export default function Services() {
       <div className="service-grid">
         {SERVICES.map((s, i) => (
           <article className="service reveal" key={s.title} style={{ transitionDelay: `${i * 80}ms` }}>
-            <span className="service-icon" aria-hidden="true">{s.icon}</span>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
+            <div className="service-img">
+              <img src={s.img} alt={s.title} loading="lazy" />
+            </div>
+            <div className="service-body">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </div>
           </article>
         ))}
       </div>

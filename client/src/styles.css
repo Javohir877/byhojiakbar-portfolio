@@ -205,17 +205,23 @@ h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 900; text-transform: uppe
 /* ============ XIZMATLAR ============ */
 .services { max-width: 1200px; margin: 0 auto; padding: 56px clamp(16px, 5vw, 64px); }
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
-.service { position: relative; padding: 26px 22px; border-radius: 20px; overflow: hidden;
+.service { position: relative; border-radius: 20px; overflow: hidden;
   background: rgba(17, 11, 20, .6); border: 1px solid var(--line); backdrop-filter: blur(10px);
   transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1), border-color .3s, box-shadow .3s; }
-.service::before { content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .3s;
-  background: radial-gradient(circle at 20% 0%, rgba(255, 42, 61, .18), transparent 60%); }
-.service:hover { border-color: rgba(123, 92, 255, .55); box-shadow: 0 16px 40px rgba(123, 92, 255, .2); }
-.service:hover::before { opacity: 1; }
-.service-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; font-size: 26px;
-  background: linear-gradient(135deg, rgba(123, 92, 255, .3), rgba(255, 42, 61, .3)); border: 1px solid rgba(255, 255, 255, .1); }
-.service h3 { position: relative; margin: 18px 0 8px; font-size: 18px; font-weight: 800; }
-.service p { position: relative; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.service:hover { border-color: rgba(123, 92, 255, .55); box-shadow: 0 16px 40px rgba(123, 92, 255, .25), 0 0 40px rgba(255, 42, 61, .12); }
+.service-img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.service-img img { display: block; width: 100%; height: 100%; object-fit: cover;
+  transition: transform .6s cubic-bezier(.2, .8, .2, 1), filter .4s; filter: saturate(1.05) brightness(.92); }
+.service:hover .service-img img { transform: scale(1.08); filter: saturate(1.2) brightness(1); }
+/* Rasm pastki qismi kartochka foniga silliq qo'shilib ketadi + neon chiziq */
+.service-img::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, transparent 45%, rgba(17, 11, 20, .95) 100%),
+    linear-gradient(135deg, rgba(123, 92, 255, .18), transparent 40%, rgba(255, 42, 61, .15)); }
+.service-img::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; z-index: 1;
+  background: linear-gradient(90deg, transparent, var(--violet), var(--red), transparent); opacity: .7; }
+.service-body { position: relative; padding: 4px 22px 24px; }
+.service h3 { margin: 10px 0 8px; font-size: 18px; font-weight: 800; }
+.service p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
 .steps div { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 16px;
   border: 1px dashed rgba(255, 255, 255, .14); }
