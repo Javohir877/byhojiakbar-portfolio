@@ -280,11 +280,13 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
   box-shadow: 0 0 0 1px rgba(123, 92, 255, .35), 0 0 80px rgba(123, 92, 255, .25), 0 30px 90px rgba(0, 0, 0, .8);
   animation: pop .25s cubic-bezier(.2, .8, .2, 1); }
 @keyframes pop { from { transform: scale(.94); opacity: 0; } }
-.player.portrait { width: min(100%, 560px, calc(88vh * .75)); }
-.player.square { width: min(100%, 720px, 88vh); }
-.player.vertical { width: min(100%, calc(88vh * 9 / 16)); }
-.player.horizontal { width: min(100%, 1100px); }
-.player video { display: block; width: 100%; max-height: 88vh; cursor: pointer; background: #000; }
+/* Pleyer videoning haqiqiy nisbatiga (--ar = eni/bo'yi) qarab ham eniga, ham bo'yiga sig'adi.
+   svh — brauzer paneli ko'rinib turgandagi haqiqiy ko'rinadigan balandlik (telefonlar uchun muhim) */
+.player { --ar: .5625; --avail-h: 88vh;
+  width: min(100%, 1100px, calc(var(--avail-h) * var(--ar))); }
+@supports (height: 1svh) { .player { --avail-h: 88svh; } }
+.player video { display: block; width: 100%; height: auto; aspect-ratio: var(--ar); max-height: var(--avail-h);
+  object-fit: contain; cursor: pointer; background: #000; }
 .player.idle { cursor: none; }
 .player.idle .controls { opacity: 0; transform: translateY(8px); }
 .controls { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 14px 10px;
@@ -312,7 +314,8 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
 .spinner { position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, .15); border-top-color: var(--red); animation: spin .8s linear infinite; pointer-events: none; }
 .player:fullscreen { width: 100%; border-radius: 0; display: grid; place-items: center; }
-.player:fullscreen video { max-height: 100vh; height: 100vh; object-fit: contain; }
+.player:fullscreen { --avail-h: 100vh; }
+.player:fullscreen video { width: 100vw; max-height: 100vh; height: 100vh; aspect-ratio: auto; object-fit: contain; }
 
 /* ============ MOBIL ============ */
 @media (max-width: 820px) {
@@ -339,7 +342,18 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
   .logo { font-size: 15px; }
   .modal { padding: 0; }
   .modal-nav { display: none; }
-  .player, .player.portrait, .player.square, .player.vertical { width: 100%; border-radius: 0; }
+  .player { border-radius: 0; --avail-h: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+  @supports (height: 1svh) {
+    .player { --avail-h: calc(100svh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+  }
+  .modal-close { top: calc(10px + env(safe-area-inset-top)); right: 10px; width: 42px; height: 42px; background: rgba(0, 0, 0, .55); }
+  .controls { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
+  .ctl-row { gap: 2px; }
+  .ctl-row button { width: 40px; height: 40px; }
+  .ctl-count { display: none; }
+  .bar { height: 22px; }
+  .bar::before, .bar-buffer, .bar-fill { top: 9px; }
+  .bar-thumb { top: 5px; transform: scale(1); }
 }
 /* Animatsiya kamaytirilgan tizimlarda: fon jonli qoladi, faqat sekinroq */
 @media (prefers-reduced-motion: reduce) {

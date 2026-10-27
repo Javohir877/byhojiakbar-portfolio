@@ -21,6 +21,9 @@ const Icon = {
   share: <path d="M18 16.1c-.8 0-1.5.3-2 .8l-7.1-4.2c.1-.2.1-.5.1-.7s0-.5-.1-.7L16 7.2c.5.5 1.2.8 2 .8 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .2 0 .5.1.7L8 9.8C7.5 9.3 6.8 9 6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.5-.3 2-.8l7.1 4.2c-.1.2-.1.4-.1.6 0 1.6 1.3 2.9 2.9 2.9s2.9-1.3 2.9-2.9-1.2-2.9-2.8-2.9z" />,
   check: <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />,
 };
+// Format bo'yicha taxminiy nisbat (eni/bo'yi); video yuklangach haqiqiysi bilan almashadi
+const AR = { vertical: 9 / 16, portrait: 3 / 4, square: 1, horizontal: 16 / 9 };
+
 const Svg = ({ name }) => <svg viewBox="0 0 24 24" aria-hidden="true">{Icon[name]}</svg>;
 
 export default function Player({ works, index, onChange, onClose }) {
@@ -36,6 +39,8 @@ export default function Player({ works, index, onChange, onClose }) {
   const [loading, setLoading] = useState(true);
   const [idle, setIdle] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [ar, setAr] = useState(AR[work.format] || 9 / 16);
+  const touch = useRef(null);
 
   // Telefonda tizim "Ulashish" oynasi, kompyuterda havolani nusxalash
   const share = async () => {
@@ -86,7 +91,26 @@ export default function Player({ works, index, onChange, onClose }) {
   const fullscreen = () => {
     sfx.impact();
     if (document.fullscreenElement) document.exitFullscreen();
-    else box.current.requestFullscreen?.().catch(() => {});
+    else if (box.current.requestFullscreen) box.current.requestFullscreen().catch(() => {});
+    // iPhone Safari faqat videoning o'zini to'liq ekranga chiqaradi
+    else video.current.webkitEnterFullscreen?.();
+  };
+
+  // Telefonda barmoq bilan: chapga/o'ngga — keyingi/oldingi video, pastga — yopish
+  const onTouchStart = (e) => {
+    wake();
+    if (e.target.closest(".controls")) { touch.current = null; return; }
+    const t = e.touches[0];
+    touch.current = { x: t.clientX, y: t.clientY, at: Date.now() };
+  };
+  const onTouchEnd = (e) => {
+    const s = touch.current;
+    touch.current = null;
+    if (!s || Date.now() - s.at > 600) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - s.x, dy = t.clientY - s.y;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? 1 : -1);
+    else if (dy > 90 && dy > Math.abs(dx) * 1.5) close();
   };
 
   // Harakatsiz bo'lsa boshqaruv paneli yashiriladi
@@ -104,6 +128,7 @@ export default function Player({ works, index, onChange, onClose }) {
 
   useEffect(() => {
     setTime(0); setDuration(0); setBuffered(0); setLoading(true);
+    setAr(AR[work.format] || 9 / 16);
     video.current.play().catch(() => setPlaying(false));
     wake();
   }, [work.id]);
@@ -148,8 +173,10 @@ export default function Player({ works, index, onChange, onClose }) {
       <div
         ref={box}
         className={`player ${work.format} ${idle && playing ? "idle" : ""}`}
+        style={{ "--ar": ar }}
         onMouseMove={wake}
-        onTouchStart={wake}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
         <video
           ref={video}
@@ -165,7 +192,11 @@ export default function Player({ works, index, onChange, onClose }) {
           onWaiting={() => setLoading(true)}
           onCanPlay={() => setLoading(false)}
           onPlaying={() => setLoading(false)}
-          onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+          onLoadedMetadata={(e) => {
+            const v = e.currentTarget;
+            setDuration(v.duration);
+            if (v.videoWidth && v.videoHeight) setAr(v.videoWidth / v.videoHeight);
+          }}
           onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
           onProgress={(e) => {
             const v = e.currentTarget;
