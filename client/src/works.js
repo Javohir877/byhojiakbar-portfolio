@@ -42,6 +42,7 @@ export const WORKS = [
   { id: "mrzoxxd-3", title: "Mirzoxid — mashg'ulotdagi texnika", category: "football", format: "square", duration: 22 },
   { id: "neymar-jr", title: "Yosh Neymar — Santos davri", category: "football", format: "portrait", duration: 22 },
   { id: "azim-maktab", title: "Azim aka va maktab hangomasi 😂", category: "comedy", format: "portrait", duration: 54 },
+  { id: "comp-47", title: "Neymar — Braziliya, Jahon chempionati 2014", category: "football", format: "portrait", duration: 26 },
 ];
 
 const base = import.meta.env.BASE_URL;
