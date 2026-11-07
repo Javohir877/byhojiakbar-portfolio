@@ -21,6 +21,7 @@ export const PROFILE = {
 export const CATEGORIES = {
   football: "Futbol",
   content: "Bloger kontent",
+  ad: "Reklama",
   comedy: "Kulgili",
   auto: "Avto",
   doc: "Hujjatli",
@@ -43,6 +44,7 @@ export const WORKS = [
   { id: "neymar-jr", title: "Yosh Neymar — Santos davri", category: "football", format: "portrait", duration: 22 },
   { id: "azim-maktab", title: "Azim aka va maktab hangomasi 😂", category: "comedy", format: "portrait", duration: 54 },
   { id: "comp-47", title: "Neymar — Braziliya, Jahon chempionati 2014", category: "football", format: "portrait", duration: 26 },
+  { id: "sayber-edit", title: "Sayber — sport kiyim brendi uchun reklama", category: "ad", format: "vertical", duration: 13 },
 ];
 
 const base = import.meta.env.BASE_URL;
