@@ -45,8 +45,11 @@ export const WORKS = [
   { id: "azim-maktab", title: "Azim aka va maktab hangomasi 😂", category: "comedy", format: "portrait", duration: 54 },
   { id: "comp-47", title: "Neymar — Braziliya, Jahon chempionati 2014", category: "football", format: "portrait", duration: 26 },
   { id: "sayber-edit", title: "Sayber — sport kiyim brendi uchun reklama", category: "ad", format: "vertical", duration: 13 },
+  { id: "neymar-smooth", title: "Neymar — silliq o'tishlar bilan karyera editi", category: "football", format: "portrait", duration: 20 },
 ];
 
 const base = import.meta.env.BASE_URL;
-export const videoSrc = (w) => `${base}videos/${w.id}.mp4`;
+// Sifatlar: asl fayl — 1080p, qolganlari id-720.mp4 va id-480.mp4
+export const QUALITIES = [1080, 720, 480];
+export const videoSrc = (w, q = 1080) => `${base}videos/${w.id}${q === 1080 ? "" : `-${q}`}.mp4`;
 export const posterSrc = (w) => `${base}videos/${w.id}.jpg`;

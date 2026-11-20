@@ -346,14 +346,27 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
   @supports (height: 1svh) {
     .player { --avail-h: calc(100svh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
   }
-  .modal-close { top: calc(10px + env(safe-area-inset-top)); right: 10px; width: 42px; height: 42px; background: rgba(0, 0, 0, .55); }
-  .controls { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
-  .ctl-row { gap: 2px; }
-  .ctl-row button { width: 40px; height: 40px; }
-  .ctl-count { display: none; }
-  .bar { height: 22px; }
-  .bar::before, .bar-buffer, .bar-fill { top: 9px; }
-  .bar-thumb { top: 5px; transform: scale(1); }
+  /* ---- Ixcham telefon pleyeri ---- */
+  .modal-close { top: calc(8px + env(safe-area-inset-top)); right: 8px; width: 36px; height: 36px;
+    background: rgba(0, 0, 0, .45); border-color: rgba(255, 255, 255, .12); }
+  .modal-close svg { width: 18px; height: 18px; }
+  .controls { padding: 28px 10px calc(4px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, rgba(0, 0, 0, .78), rgba(0, 0, 0, .35) 60%, transparent); }
+  .ctl-title { font-size: 12px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 4px; }
+  .bar { height: 18px; }
+  .bar::before, .bar-buffer, .bar-fill, .bar:hover::before, .bar:hover .bar-buffer, .bar:hover .bar-fill { top: 8px; height: 3px; }
+  .bar-thumb { top: 4px; width: 11px; height: 11px; margin-left: -5.5px; transform: scale(1); }
+  .ctl-row { gap: 0; margin-top: 0; }
+  .ctl-row button { width: 36px; height: 36px; }
+  .modal svg { width: 20px; height: 20px; }
+  .ctl-time { font-size: 11.5px; margin-left: 2px; }
+  .ctl-time i { opacity: .6; }
+  .ctl-row .ctl-count, .ctl-row .ctl-share, .ctl-row .vol-slider { display: none; }
+  .ctl-row .q-btn b { display: none; }
+  .ctl-row .q-btn { margin-left: auto; padding: 0 !important; width: 36px !important; justify-content: center; }
+  .big-play { width: 60px; height: 60px; margin: -30px 0 0 -30px; }
+  .big-play svg { width: 26px; height: 26px; }
+  .q-menu { right: 8px; bottom: calc(64px + env(safe-area-inset-bottom)); min-width: 200px; }
 }
 /* Animatsiya kamaytirilgan tizimlarda: fon jonli qoladi, faqat sekinroq */
 @media (prefers-reduced-motion: reduce) {
@@ -372,3 +385,39 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
 /* Video pleyer ochiq bo'lsa orqadagi animatsiyalar to'xtaydi */
 .paused .aurora, .paused .grid-lines, .paused .hero-ring::before, .paused .tilt,
 .paused .tilt-spark, .paused .sound-toggle .eq i { animation-play-state: paused; }
+
+/* ============ PLEYER: ovoz va sifat ============ */
+.ctl-time i { font-style: normal; color: #aaa; }
+.vol { display: flex; align-items: center; }
+.vol-slider { width: 0; opacity: 0; transition: width .25s, opacity .25s; margin: 0; }
+.vol:hover .vol-slider, .vol:focus-within .vol-slider { width: 76px; opacity: 1; margin: 0 6px 0 2px; }
+.q-btn { position: relative; width: auto !important; padding: 0 8px; border-radius: 999px !important; gap: 4px;
+  display: flex !important; align-items: center; }
+.q-btn b { font-size: 11px; font-weight: 800; color: var(--violet-soft); }
+.q-btn.on svg { transform: rotate(60deg); }
+.q-btn svg { transition: transform .3s; }
+
+/* Range (ovoz) — neon uslubda */
+.player input[type=range] { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 4px; cursor: pointer;
+  background: linear-gradient(90deg, var(--violet), var(--red)) 0 / var(--v, 100%) 100% no-repeat, rgba(255, 255, 255, .22); }
+.player input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 8px rgba(255, 255, 255, .8); border: 0; }
+.player input[type=range]::-moz-range-thumb { width: 13px; height: 13px; border-radius: 50%; background: #fff; border: 0; }
+
+/* Sifat menyusi */
+.q-menu { position: absolute; right: 12px; bottom: 74px; z-index: 3; min-width: 210px; padding: 8px;
+  border-radius: 14px; background: rgba(14, 9, 18, .96); border: 1px solid rgba(185, 166, 255, .25);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .6), 0 0 24px rgba(123, 92, 255, .2); animation: pop .18s ease-out; }
+.q-title { padding: 6px 10px 4px; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+.q-menu button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 10px; border: 0; border-radius: 9px;
+  background: transparent; cursor: pointer; font-size: 14px; font-weight: 600; text-align: left; }
+.q-menu button:hover { background: rgba(255, 255, 255, .07); }
+.q-menu button.active { color: #fff; background: rgba(123, 92, 255, .2); }
+.q-menu button em { font-style: normal; font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 4px;
+  background: var(--red); color: #fff; }
+.q-menu button svg { width: 18px; height: 18px; margin-left: auto; }
+.q-volume { display: flex; align-items: center; gap: 10px; padding: 6px 10px 10px; }
+.q-volume svg { width: 20px; height: 20px; flex: none; }
+.q-volume input { flex: 1; }
+.q-share { margin-top: 4px; border-top: 1px solid var(--line) !important; border-radius: 0 0 9px 9px !important; }
+.q-share svg { margin-left: 0 !important; }

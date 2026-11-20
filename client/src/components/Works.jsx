@@ -17,7 +17,8 @@ function Card({ work, index, views, onOpen }) {
     if (!v) return;
     if (on) {
       // Video faqat birinchi hover'da ulanadi — sahifa ochilganda hech narsa yuklanmaydi
-      if (!v.getAttribute("src")) v.src = videoSrc(work);
+      // Oldindan ko'rish uchun eng yengil 480p nusxa yetarli
+      if (!v.getAttribute("src")) v.src = videoSrc(work, 480);
       v.play().catch(() => {});
     }
     else { v.pause(); v.currentTime = 0; }
