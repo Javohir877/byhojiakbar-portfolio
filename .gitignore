@@ -5,3 +5,4 @@ server/data/
 # Siqilmagan asl videolar (GitHub 100 MB dan katta faylni qabul qilmaydi)
 /videos/
 /.claude/
+/videos-1080-original/

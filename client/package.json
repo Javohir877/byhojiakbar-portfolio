@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && node scripts/deploy.mjs"
+    "deploy": "vite build --base=/ && wrangler pages deploy dist --project-name byhojiakbar --branch main --commit-dirty=true",
+    "deploy:gh-redirect": "node scripts/deploy.mjs gh-redirect"
   },
   "dependencies": {
     "react": "19.1.0",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.5.2",
-    "vite": "6.3.5"
+    "vite": "6.3.5",
+    "wrangler": "4.166.0"
   }
 }
