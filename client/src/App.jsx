@@ -32,7 +32,13 @@ export default function App() {
   const playlist = shown.some((w) => w.id === openId) ? shown : ORDERED;
   const openIndex = playlist.findIndex((w) => w.id === openId);
 
-  useReveal([filter]);
+  useReveal();
+  // Kinematik kirish chiziqlari animatsiyadan keyin olib tashlanadi
+  const [intro, setIntro] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setIntro(false), 1500);
+    return () => clearTimeout(t);
+  }, []);
   useSfx();
 
   useEffect(() => {
@@ -53,6 +59,7 @@ export default function App() {
   return (
     <>
       <Background />
+      {intro && <div className="intro-bars" aria-hidden="true" />}
       <header className="nav">
         <a href="#top" className="logo">By.<span>Hojiakbar</span></a>
         <nav>

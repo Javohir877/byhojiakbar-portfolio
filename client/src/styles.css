@@ -67,11 +67,11 @@ header, main, footer { position: relative; z-index: 1; }
 .nav nav { display: flex; gap: 22px; align-items: center; font-weight: 600; font-size: 14px; }
 .nav nav a { color: var(--muted); transition: color .2s; }
 .nav nav a:hover { color: var(--text); }
-.nav .nav-cta { color: var(--text); padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255, 42, 61, .6);
+.nav .nav-cta { color: var(--text); padding: 6px 14px; font-size: 13px; border-radius: 999px; border: 1px solid rgba(255, 42, 61, .6);
   box-shadow: 0 0 18px rgba(255, 42, 61, .25) inset; }
 
 /* Ovoz tugmasi — ekvalayzer */
-.sound-toggle { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+.sound-toggle { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
   background: rgba(255, 255, 255, .04); border: 1px solid var(--line); transition: border-color .2s, box-shadow .2s; }
 .sound-toggle:hover { border-color: rgba(123, 92, 255, .6); box-shadow: var(--glow); }
 .sound-toggle .eq { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
@@ -141,7 +141,7 @@ h1 { font-family: var(--font-display); font-size: clamp(30px, 5.4vw, 66px); font
   text-shadow: 0 0 14px rgba(255, 42, 61, .6); }
 .about { color: var(--muted); margin: 16px 0 28px; line-height: 1.65; max-width: 460px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn { display: inline-block; padding: 14px 28px; border: 0; border-radius: 999px; font-weight: 800; cursor: pointer;
+.btn { display: inline-block; padding: 11px 22px; font-size: 14px; border: 0; border-radius: 999px; font-weight: 800; cursor: pointer;
   background: linear-gradient(135deg, var(--violet), var(--red)); box-shadow: 0 10px 30px rgba(255, 42, 61, .3);
   transition: transform .2s, box-shadow .2s, opacity .2s; }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(123, 92, 255, .5); }
@@ -168,18 +168,16 @@ h2 { font-family: var(--font-display); font-size: clamp(26px, 4vw, 42px); font-w
 .card.horizontal { aspect-ratio: 16 / 9; }
 .card:hover, .card:focus-visible { transform: translateY(-5px); border-color: rgba(123, 92, 255, .7); outline: none;
   box-shadow: 0 0 0 1px rgba(123, 92, 255, .4), 0 18px 50px rgba(123, 92, 255, .3), 0 0 60px rgba(255, 42, 61, .15); }
-.card img, .card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.card video { opacity: 0; transition: opacity .3s; }
+.card > img, .card > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card > video { opacity: 0; transition: opacity .3s; }
 .card:hover video { opacity: 1; }
 .card .play { position: absolute; inset: 0; display: grid; place-items: center;
   background: linear-gradient(to top, rgba(0, 0, 0, .8), transparent 45%); }
-.card .play::before { content: ""; width: 58px; height: 58px; border-radius: 50%;
-  background: rgba(255, 255, 255, .14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/26px no-repeat;
+.card .play::before { content: ""; width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255, 255, 255, .14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/18px no-repeat;
   border: 1px solid rgba(255, 255, 255, .3);
   transition: transform .25s, opacity .25s; }
 .card:hover .play::before { transform: scale(.8); opacity: 0; }
-.card { animation: card-in .6s cubic-bezier(.2, .8, .2, 1) backwards; }
-@keyframes card-in { from { opacity: 0; transform: translateY(24px) scale(.97); } }
 .card .meta { position: absolute; left: 14px; right: 14px; bottom: 12px; display: grid; gap: 6px; }
 .card .tag { justify-self: start; padding: 3px 9px; border-radius: 999px; font-size: 10px; font-weight: 800;
   letter-spacing: 1.2px; text-transform: uppercase; color: var(--violet-soft);
@@ -191,7 +189,7 @@ h2 { font-family: var(--font-display); font-size: clamp(26px, 4vw, 42px); font-w
 
 /* Toifa filtrlari */
 .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
-.chip { padding: 9px 16px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 14px;
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 8px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 13px;
   background: rgba(255, 255, 255, .04); border: 1px solid var(--line); color: var(--muted);
   transition: color .2s, background .2s, border-color .2s, box-shadow .2s; }
 .chip span { margin-left: 4px; font-size: 12px; opacity: .7; }
@@ -200,8 +198,7 @@ h2 { font-family: var(--font-display); font-size: clamp(26px, 4vw, 42px); font-w
   box-shadow: 0 6px 24px rgba(255, 42, 61, .35); }
 
 /* Aylantirganda paydo bo'lish */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1); }
-.reveal.in { opacity: 1; transform: none; }
+
 
 /* ============ XIZMATLAR ============ */
 .services { max-width: 1200px; margin: 0 auto; padding: 56px clamp(16px, 5vw, 64px); }
@@ -240,7 +237,7 @@ h2 { font-family: var(--font-display); font-size: clamp(26px, 4vw, 42px); font-w
 .contact { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
 .contact-info p { color: var(--muted); margin: 16px 0 22px; line-height: 1.6; }
 .links { display: flex; flex-wrap: wrap; gap: 12px; }
-.links a { padding: 12px 22px; border-radius: 999px; font-weight: 700; border: 1px solid rgba(123, 92, 255, .5);
+.links a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; padding: 8px 16px 8px 10px; border-radius: 999px; font-weight: 700; border: 1px solid rgba(123, 92, 255, .5);
   transition: background .2s, box-shadow .2s; }
 .links a:hover { background: rgba(123, 92, 255, .15); box-shadow: var(--glow); }
 .order { display: grid; gap: 14px; padding: clamp(20px, 3vw, 32px); border-radius: 22px;
@@ -267,7 +264,7 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
   animation: fade .2s ease-out; }
 @keyframes fade { from { opacity: 0; } }
 .modal svg { width: 24px; height: 24px; fill: currentColor; display: block; }
-.modal-close, .modal-nav { position: absolute; z-index: 2; display: grid; place-items: center; width: 48px; height: 48px;
+.modal-close, .modal-nav { position: absolute; z-index: 2; display: grid; place-items: center; width: 40px; height: 40px;
   border-radius: 50%; border: 1px solid var(--line); background: rgba(255, 255, 255, .06); cursor: pointer;
   transition: background .2s, box-shadow .2s; }
 .modal-close:hover, .modal-nav:hover { background: rgba(123, 92, 255, .25); box-shadow: var(--glow); }
@@ -302,15 +299,15 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
 .bar:hover .bar-thumb { transform: scale(1); }
 .bar:hover::before, .bar:hover .bar-buffer, .bar:hover .bar-fill { top: 5px; height: 6px; }
 .ctl-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
-.ctl-row button { display: grid; place-items: center; width: 38px; height: 38px; border: 0; border-radius: 50%;
+.ctl-row button { display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 50%;
   background: transparent; cursor: pointer; transition: background .2s; }
 .ctl-row button:hover { background: rgba(255, 255, 255, .12); }
 .ctl-time { font-size: 13px; font-variant-numeric: tabular-nums; color: #ddd; }
 .ctl-count { margin-left: auto; font-size: 12px; color: var(--muted); }
-.big-play { position: absolute; top: 50%; left: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; display: grid; place-items: center;
+.big-play { position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px; display: grid; place-items: center;
   border-radius: 50%; border: 1px solid rgba(255, 255, 255, .35); cursor: pointer;
   background: rgba(123, 92, 255, .35); box-shadow: var(--glow); }
-.big-play svg { width: 34px; height: 34px; }
+.big-play svg { width: 26px; height: 26px; }
 .spinner { position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, .15); border-top-color: var(--red); animation: spin .8s linear infinite; pointer-events: none; }
 .player:fullscreen { width: 100%; border-radius: 0; display: grid; place-items: center; }
@@ -334,10 +331,10 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
   .tilt-chip.c2 { right: 3%; }
   .card .pin { padding: 4px 8px; }
   .chips { gap: 8px; }
-  .chip { padding: 8px 13px; font-size: 13px; }
+  .chip { padding: 5px 10px 5px 7px; font-size: 12px; }
   .card { margin-bottom: 12px; border-radius: 14px; }
   .card .title { font-size: 12px; left: 10px; bottom: 9px; }
-  .card .play::before { width: 44px; height: 44px; background-size: 20px; }
+  .card .play::before { width: 34px; height: 34px; background-size: 15px; }
   .nav nav a:not(.nav-cta) { display: none; }
   .logo { font-size: 15px; }
   .modal { padding: 0; }
@@ -364,7 +361,7 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
   .ctl-row .ctl-count, .ctl-row .ctl-share, .ctl-row .vol-slider { display: none; }
   .ctl-row .q-btn b { display: none; }
   .ctl-row .q-btn { margin-left: auto; padding: 0 !important; width: 36px !important; justify-content: center; }
-  .big-play { width: 60px; height: 60px; margin: -30px 0 0 -30px; }
+  .big-play { width: 52px; height: 52px; margin: -26px 0 0 -26px; }
   .big-play svg { width: 26px; height: 26px; }
   .q-menu { right: 8px; bottom: calc(64px + env(safe-area-inset-bottom)); min-width: 200px; }
 }
@@ -421,3 +418,69 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px
 .q-volume input { flex: 1; }
 .q-share { margin-top: 4px; border-top: 1px solid var(--line) !important; border-radius: 0 0 9px 9px !important; }
 .q-share svg { margin-left: 0 !important; }
+
+/* ============ IKONKALAR ============ */
+.ico { display: inline-block; flex: none; object-fit: contain; vertical-align: middle; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .35)); }
+.brand { width: 18px; height: 18px; flex: none; }
+.tilt-chip { display: inline-flex; align-items: center; gap: 6px; }
+.card .tag { display: inline-flex; align-items: center; gap: 5px; padding-left: 5px; }
+.card .pin { display: inline-flex; align-items: center; gap: 5px; }
+.card .views { display: inline-flex; align-items: center; gap: 4px; }
+.chip .ico { transition: transform .3s cubic-bezier(.3, 1.6, .5, 1); }
+.chip:hover .ico, .chip.active .ico { transform: scale(1.18) rotate(-8deg); }
+
+/* ============ MONTAJ USLUBIDAGI ANIMATSIYALAR ============ */
+/* 1) Kinematik kirish: letterbox chiziqlar ochiladi */
+.intro-bars { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+.intro-bars::before, .intro-bars::after { content: ""; position: absolute; left: 0; right: 0; height: 50.5%; background: #000;
+  animation: bar-open 1.1s cubic-bezier(.77, 0, .18, 1) .15s forwards; }
+.intro-bars::before { top: 0; }
+.intro-bars::after { bottom: 0; animation-name: bar-open-b; }
+@keyframes bar-open { to { transform: translateY(-100%); } }
+@keyframes bar-open-b { to { transform: translateY(100%); } }
+/* Ism glitch bilan paydo bo'ladi */
+.hero h1 { animation: glitch-in 1.1s steps(1) .7s backwards; }
+@keyframes glitch-in {
+  0% { opacity: 0; }
+  10% { opacity: 1; transform: translate(-6px, 0) skewX(-12deg); text-shadow: 4px 0 var(--red), -4px 0 #2ff; clip-path: inset(0 0 55% 0); }
+  20% { transform: translate(5px, 0); clip-path: inset(40% 0 0 0); }
+  30% { transform: translate(-2px, 0); clip-path: inset(10% 0 30% 0); text-shadow: -3px 0 var(--red), 3px 0 #2ff; }
+  45% { transform: none; clip-path: none; text-shadow: 2px 0 var(--red), -2px 0 #2ff; }
+  60% { text-shadow: none; }
+  100% { opacity: 1; }
+}
+
+/* 2) Sarlavhalar: timeline playhead o'tib, matnni ochadi */
+.reveal.head { position: relative; }
+.reveal.head h2 { clip-path: inset(0 100% 0 0); }
+.reveal.head::after { content: ""; position: absolute; top: -4px; bottom: -4px; left: 0; width: 3px; border-radius: 2px; opacity: 0;
+  background: var(--red); box-shadow: 0 0 12px var(--red), 0 0 24px var(--red); }
+.reveal.head.in h2 { animation: wipe-r .75s cubic-bezier(.65, 0, .35, 1) forwards; }
+.reveal.head.in::after { animation: playhead .75s cubic-bezier(.65, 0, .35, 1) forwards; }
+@keyframes wipe-r { to { clip-path: inset(0 0 0 0); } }
+@keyframes playhead { 0% { opacity: 1; left: 0; } 85% { opacity: 1; } 100% { opacity: 0; left: var(--head-w, 260px); } }
+
+/* 3) Video kartochkalar: zatvor kabi o'rtadan ochiladi + flash + zoom */
+.card.reveal { clip-path: inset(50% 0 50% 0 round 18px); }
+.card.reveal > img { transform: scale(1.3); }
+.card.reveal::after { content: ""; position: absolute; inset: 0; z-index: 3; background: #fff; opacity: 0; pointer-events: none; }
+.card.reveal.in { animation: shutter .7s cubic-bezier(.7, 0, .2, 1) var(--d, 0ms) forwards; }
+.card.reveal.in > img { transition: transform 1.1s cubic-bezier(.2, .8, .2, 1) var(--d, 0ms); transform: scale(1); }
+.card.reveal.in::after { animation: flash .55s ease-out calc(var(--d, 0ms) + .35s); }
+@keyframes shutter { to { clip-path: inset(0 0 0 0 round 18px); } }
+@keyframes flash { 0% { opacity: .55; } 100% { opacity: 0; } }
+
+/* 4) Xizmatlar, qadamlar, buyurtma: yon tomondan "cut" bilan ochiladi */
+.reveal.cut { clip-path: inset(0 100% 0 0 round 20px); }
+.reveal.cut.in { animation: cut-in .8s cubic-bezier(.77, 0, .18, 1) var(--d, 0ms) forwards; }
+@keyframes cut-in { 0% { clip-path: inset(0 100% 0 0 round 20px); } 60% { clip-path: inset(0 0 0 0 round 20px); filter: brightness(1.6); } 100% { clip-path: inset(0 0 0 0 round 20px); filter: none; } }
+.reveal.cut.in .service-img img { animation: settle 1.2s cubic-bezier(.2, .8, .2, 1) var(--d, 0ms) backwards; }
+@keyframes settle { from { transform: scale(1.25) translateX(-6%); } }
+
+/* Kartochka ustiga kelganda: qisqa RGB-glitch sarlavhada */
+.card:hover .title { animation: rgb-split .4s steps(2) 1; }
+@keyframes rgb-split { 0% { text-shadow: 2px 0 var(--red), -2px 0 #2ff; transform: translateX(1px); } 50% { text-shadow: -2px 0 var(--red), 2px 0 #2ff; transform: translateX(-1px); } 100% { text-shadow: 0 1px 6px rgba(0, 0, 0, .8); transform: none; } }
+
+/* Yengil rejim: bir xil effektlar, lekin og'ir qismlarsiz */
+.lite .card.reveal::after, .lite .card:hover .title { animation: none; }
+.lite .card.reveal > img, .lite .card.reveal.in > img { transform: none; transition: none; }

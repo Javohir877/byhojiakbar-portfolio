@@ -42,7 +42,7 @@ export const WORKS = [
   { id: "kamol", title: "Kamol — o'shanda va hozir", category: "content", format: "portrait", duration: 27 },
   { id: "mrzoxxd-3", title: "Mirzoxid — mashg'ulotdagi texnika", category: "football", format: "square", duration: 22 },
   { id: "neymar-jr", title: "Yosh Neymar — Santos davri", category: "football", format: "portrait", duration: 22 },
-  { id: "azim-maktab", title: "Azim aka va maktab hangomasi 😂", category: "comedy", format: "portrait", duration: 54 },
+  { id: "azim-maktab", title: "Azim aka va maktab hangomasi", category: "comedy", format: "portrait", duration: 54 },
   { id: "comp-47", title: "Neymar — Braziliya, Jahon chempionati 2014", category: "football", format: "portrait", duration: 26 },
   { id: "sayber-edit", title: "Sayber — sport kiyim brendi uchun reklama", category: "ad", format: "vertical", duration: 13 },
   { id: "neymar-smooth", title: "Neymar — silliq o'tishlar bilan karyera editi", category: "football", format: "portrait", duration: 20 },

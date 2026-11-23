@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CATEGORIES, posterSrc, videoSrc } from "../works.js";
+import Ico, { CATEGORY_ICON } from "./Ico.jsx";
 
 function formatViews(n) {
   if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + "M";
@@ -26,8 +27,8 @@ function Card({ work, index, views, onOpen }) {
 
   return (
     <button
-      className={`card ${work.format}${work.pinned ? " pinned" : ""}`}
-      style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
+      className={`card reveal ${work.format}${work.pinned ? " pinned" : ""}`}
+      style={{ "--d": `${(index % 3) * 90}ms` }}
       onClick={onOpen}
       onMouseEnter={() => preview(true)}
       onMouseLeave={() => preview(false)}
@@ -36,11 +37,11 @@ function Card({ work, index, views, onOpen }) {
       <img src={posterSrc(work)} alt="" loading="lazy" decoding="async" />
       <video ref={video} muted loop playsInline preload="none" />
       <span className="play" aria-hidden="true" />
-      {work.pinned && <span className="pin">📌<span className="pin-text"> Birinchi edit</span></span>}
-      {views > 0 && <span className="views">👁 {formatViews(views)}</span>}
+      {work.pinned && <span className="pin"><Ico name="pin" size={16} /><span className="pin-text">Birinchi edit</span></span>}
+      {views > 0 && <span className="views"><Ico name="eye" size={14} /> {formatViews(views)}</span>}
       {work.duration && <span className="duration">{formatDuration(work.duration)}</span>}
       <span className="meta">
-        <span className="tag">{CATEGORIES[work.category]}</span>
+        <span className="tag"><Ico name={CATEGORY_ICON[work.category]} size={14} />{CATEGORIES[work.category]}</span>
         <span className="title">{work.title}</span>
       </span>
     </button>
@@ -70,11 +71,11 @@ export default function Works({ works, total, filter, onFilter, views, onOpen })
 
   return (
     <section id="works" className="works">
-      <div className="section-head reveal">
+      <div className="section-head reveal head">
         <h2>Ishlar</h2>
         <span className="count">{works.length} ta edit</span>
       </div>
-      <div className="chips reveal" role="tablist" aria-label="Toifalar">
+      <div className="chips reveal cut" role="tablist" aria-label="Toifalar">
         {[["all", "Barchasi", total.length], ...Object.entries(CATEGORIES).map(([k, v]) => [k, v, count(k)])]
           .filter(([, , c]) => c > 0)
           .map(([key, label, c]) => (
@@ -85,7 +86,7 @@ export default function Works({ works, total, filter, onFilter, views, onOpen })
               className={`chip${filter === key ? " active" : ""}`}
               onClick={() => onFilter(key)}
             >
-              {label} <span>{c}</span>
+              <Ico name={CATEGORY_ICON[key]} size={18} />{label} <span>{c}</span>
             </button>
           ))}
       </div>

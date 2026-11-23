@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { isLite, isPaused } from "../perf.js";
+import Ico from "./Ico.jsx";
 
 // Rasmni 3D qilib harakatlantiradi:
 //  - kompyuterda sichqonchaga qarab egiladi (butun sahifa bo'ylab)
@@ -105,9 +106,9 @@ export default function Tilt3D({ src, alt }) {
         </div>
         <div className="tilt-glare" aria-hidden="true" />
         <div className="tilt-edge" aria-hidden="true" />
-        <span className="tilt-chip c1" aria-hidden="true">🎬 Video Editor</span>
-        <span className="tilt-chip c2" aria-hidden="true">✨ VFX</span>
-        <span className="tilt-chip c3" aria-hidden="true">⚽ Football edits</span>
+        <span className="tilt-chip c1" aria-hidden="true"><Ico name="clapper" size={22} /> Video Editor</span>
+        <span className="tilt-chip c2" aria-hidden="true"><Ico name="sparkles" size={22} /> VFX</span>
+        <span className="tilt-chip c3" aria-hidden="true"><Ico name="soccer" size={22} /> Football edits</span>
         <i className="tilt-spark s1" aria-hidden="true" />
         <i className="tilt-spark s2" aria-hidden="true" />
         <i className="tilt-spark s3" aria-hidden="true" />

@@ -14,12 +14,12 @@ const SERVICES = [
 export default function Services() {
   return (
     <section id="services" className="services">
-      <div className="section-head reveal">
+      <div className="section-head reveal head">
         <h2>Xizmatlar</h2>
       </div>
       <div className="service-grid">
         {SERVICES.map((s, i) => (
-          <article className="service reveal" key={s.title} style={{ transitionDelay: `${i * 80}ms` }}>
+          <article className="service reveal cut" key={s.title} style={{ "--d": `${i * 90}ms` }}>
             <div className="service-img">
               <img src={s.img} alt={s.title} loading="lazy" decoding="async" />
             </div>
@@ -30,7 +30,7 @@ export default function Services() {
           </article>
         ))}
       </div>
-      <div className="steps reveal">
+      <div className="steps reveal cut">
         <div><b>1</b><span>Telegram'da yozasiz va g'oyani aytasiz</span></div>
         <div><b>2</b><span>Material yuborasiz: video, musiqa, namuna</span></div>
         <div><b>3</b><span>Tayyor editni olasiz, kerak bo'lsa tuzataman</span></div>

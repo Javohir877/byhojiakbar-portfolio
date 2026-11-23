@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { API_URL, sendOrder } from "../api.js";
+import { BrandIcon } from "./Ico.jsx";
 
 const SERVICES = ["Shorts / Reels edit", "YouTube video montaj", "VFX / effektlar", "Boshqa"];
 
@@ -23,21 +24,21 @@ export default function Contact({ profile }) {
 
   return (
     <section id="contact" className="contact">
-      <div className="contact-info reveal">
+      <div className="contact-info reveal cut">
         <h2>Buyurtma</h2>
         <p>
           Videongizni yangi darajaga olib chiqamiz.{" "}
           {API_URL ? "Formani to'ldiring yoki to'g'ridan-to'g'ri yozing:" : "To'g'ridan-to'g'ri yozing:"}
         </p>
         <div className="links">
-          {profile.telegram && <a href={profile.telegram} target="_blank" rel="noopener">Telegram {profile.telegramNick}</a>}
-          {profile.youtube && <a href={profile.youtube} target="_blank" rel="noopener">YouTube</a>}
-          {profile.instagram && <a href={profile.instagram} target="_blank" rel="noopener">Instagram</a>}
+          {profile.telegram && <a href={profile.telegram} target="_blank" rel="noopener"><BrandIcon name="telegram" />Telegram {profile.telegramNick}</a>}
+          {profile.youtube && <a href={profile.youtube} target="_blank" rel="noopener"><BrandIcon name="youtube" />YouTube</a>}
+          {profile.instagram && <a href={profile.instagram} target="_blank" rel="noopener"><BrandIcon name="instagram" />Instagram</a>}
         </div>
       </div>
 
       {API_URL ? (
-        <form className="order reveal" onSubmit={submit}>
+        <form className="order reveal cut" onSubmit={submit}>
           <label>Ismingiz
             <input required maxLength={60} value={form.name} onChange={set("name")} placeholder="Ism" />
           </label>
@@ -60,7 +61,7 @@ export default function Contact({ profile }) {
           {status.text && <p className={`form-msg ${status.state}`}>{status.text}</p>}
         </form>
       ) : (
-        <div className="order order-fallback reveal">
+        <div className="order order-fallback reveal cut">
           <p>Buyurtma uchun Telegram'da yozing — tez javob beraman.</p>
           <a className="btn" href={profile.telegram} target="_blank" rel="noopener">Telegram'da yozish</a>
         </div>
