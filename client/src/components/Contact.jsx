@@ -1,8 +1,41 @@
 import { useState } from "react";
 import { API_URL, sendOrder } from "../api.js";
-import { BrandIcon } from "./Ico.jsx";
+import { BrandGlyph } from "./Ico.jsx";
 
 const SERVICES = ["Shorts / Reels edit", "YouTube video montaj", "VFX / effektlar", "Boshqa"];
+
+// Ijtimoiy tarmoq kartochkalari — har biri o'z brendi rangidagi gradient bilan
+function SocialCards({ profile }) {
+  const items = [
+    profile.telegram && {
+      key: "telegram", title: "Telegram", sub: profile.telegram.replace(/^https?:\/\//, ""), href: profile.telegram,
+    },
+    profile.instagram && {
+      key: "instagram", title: "Instagram sahifa", sub: "@" + profile.instagram.replace(/\/$/, "").split("/").pop(), href: profile.instagram,
+    },
+    profile.youtube && {
+      key: "youtube", title: "YouTube kanal", sub: "@" + profile.youtube.split("@").pop(), href: profile.youtube,
+    },
+  ].filter(Boolean);
+
+  return (
+    <div className="socials">
+      {items.map((s, i) => (
+        <a key={s.key} className={`social ${s.key} reveal cut`} style={{ "--d": `${i * 90}ms` }}
+          href={s.href} target="_blank" rel="noopener">
+          <span className="social-icon"><BrandGlyph name={s.key} /></span>
+          <span className="social-text">
+            <b>{s.title}</b>
+            <small>{s.sub}</small>
+          </span>
+          <svg className="social-arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export default function Contact({ profile }) {
   const [form, setForm] = useState({ name: "", contact: "", service: SERVICES[0], message: "", website: "" });
@@ -25,16 +58,13 @@ export default function Contact({ profile }) {
   return (
     <section id="contact" className="contact">
       <div className="contact-info reveal cut">
+        <span className="eyebrow"><i />Biz bilan aloqada bo'ling</span>
         <h2>Buyurtma</h2>
         <p>
-          Videongizni yangi darajaga olib chiqamiz.{" "}
-          {API_URL ? "Formani to'ldiring yoki to'g'ridan-to'g'ri yozing:" : "To'g'ridan-to'g'ri yozing:"}
+          Videongizni yangi darajaga olib chiqamiz. Yangi editlar va buyurtma uchun sahifalarimizga
+          yozing{API_URL ? " yoki formani to'ldiring" : ""}.
         </p>
-        <div className="links">
-          {profile.telegram && <a href={profile.telegram} target="_blank" rel="noopener"><BrandIcon name="telegram" />Telegram {profile.telegramNick}</a>}
-          {profile.youtube && <a href={profile.youtube} target="_blank" rel="noopener"><BrandIcon name="youtube" />YouTube</a>}
-          {profile.instagram && <a href={profile.instagram} target="_blank" rel="noopener"><BrandIcon name="instagram" />Instagram</a>}
-        </div>
+        {API_URL && <SocialCards profile={profile} />}
       </div>
 
       {API_URL ? (
@@ -61,10 +91,7 @@ export default function Contact({ profile }) {
           {status.text && <p className={`form-msg ${status.state}`}>{status.text}</p>}
         </form>
       ) : (
-        <div className="order order-fallback reveal cut">
-          <p>Buyurtma uchun Telegram'da yozing — tez javob beraman.</p>
-          <a className="btn" href={profile.telegram} target="_blank" rel="noopener">Telegram'da yozish</a>
-        </div>
+        <SocialCards profile={profile} />
       )}
     </section>
   );

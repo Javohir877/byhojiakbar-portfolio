@@ -25,34 +25,26 @@ export default function Ico({ name, size = 18, className = "" }) {
   );
 }
 
-// Ijtimoiy tarmoq logotiplari (sodda SVG)
-export function BrandIcon({ name }) {
+// Oq logotip belgilari — rangli gradient plitka ichida ishlatiladi
+export function BrandGlyph({ name }) {
   if (name === "telegram")
     return (
-      <svg viewBox="0 0 24 24" className="brand" aria-hidden="true">
-        <circle cx="12" cy="12" r="12" fill="#29A9EB" />
-        <path fill="#fff" d="M5.4 11.7 16.9 7.3c.5-.2 1 .1.8 1l-1.9 9.1c-.1.6-.5.8-1.1.5l-2.9-2.2-1.4 1.4c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.1-.9z" />
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="#fff" d="M3.4 11.3 18.9 5.3c.7-.3 1.4.2 1.2 1.3l-2.6 12.4c-.2.9-.7 1.1-1.5.7l-4-2.9-1.9 1.9c-.2.2-.4.4-.8.4l.3-4.1 7.4-6.7c.3-.3 0-.4-.4-.2l-9.2 5.8-4-1.2c-.9-.3-.9-.9.2-1.3z" />
       </svg>
     );
   if (name === "youtube")
     return (
-      <svg viewBox="0 0 24 24" className="brand" aria-hidden="true">
-        <rect x="1" y="4.5" width="22" height="15" rx="4.5" fill="#FF0000" />
-        <path fill="#fff" d="M10 8.8v6.4l5.6-3.2z" />
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="5" width="20" height="14" rx="4.5" fill="#fff" />
+        <path fill="#FF0033" d="M10 8.8v6.4l5.6-3.2z" />
       </svg>
     );
   return (
-    <svg viewBox="0 0 24 24" className="brand" aria-hidden="true">
-      <defs>
-        <radialGradient id="igg" cx="30%" cy="107%" r="150%">
-          <stop offset="0" stopColor="#FDF497" /><stop offset=".05" stopColor="#FDF497" />
-          <stop offset=".45" stopColor="#FD5949" /><stop offset=".6" stopColor="#D6249F" /><stop offset=".9" stopColor="#285AEB" />
-        </radialGradient>
-      </defs>
-      <rect x="1" y="1" width="22" height="22" rx="6.5" fill="url(#igg)" />
-      <rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" strokeWidth="1.8" />
-      <circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" strokeWidth="1.8" />
-      <circle cx="16.4" cy="7.6" r="1" fill="#fff" />
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="#fff" strokeWidth="2" />
+      <circle cx="12" cy="12" r="4" fill="none" stroke="#fff" strokeWidth="2" />
+      <circle cx="17.2" cy="6.8" r="1.2" fill="#fff" />
     </svg>
   );
 }

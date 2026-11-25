@@ -38,7 +38,7 @@ export default function useSfx() {
       if (t.closest?.(".modal")) return;
       const el = t.closest?.(INTERACTIVE + ", .card");
       if (!el) return sfx.sparkle(); // bo'sh fonni bosish — uchqun portlashi
-      if (el.matches(".btn, .chip, .nav-cta, .links a, .sound-toggle")) ripple(el, e);
+      if (el.matches(".btn, .chip, .nav-cta, .social, .sound-toggle")) ripple(el, e);
       if (el.matches(".card")) sfx.open();
       else if (el.matches(".chip")) sfx.select();
       else if (el.matches(".btn, .nav-cta")) sfx.impact();
